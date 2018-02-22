@@ -3,11 +3,21 @@ import App from './app/app';
 
 // Redux
 import { Provider } from 'preact-redux';
-import store from './redux/store';
-import { addArticle } from './redux/actions';
+import storeDebug from './redux/store';
+import { createStore, applyMiddleware } from 'redux';
+import createSagaMiddleware from 'redux-saga';
 
-window.store = store;
+import {addArticle, builderMode} from './redux/actions';
+import reducer from './redux/reducers';
+import mySaga from './redux/sagas';
+
+const sagaMiddleware = createSagaMiddleware();
+const store = createStore(reducer, applyMiddleware(sagaMiddleware));
+sagaMiddleware.run(mySaga);
+
+window.storeDebug = storeDebug;
 window.addArticle = addArticle;
+window.builderMode = builderMode;
 
 render((
 	<div id="root">

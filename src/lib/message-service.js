@@ -8,6 +8,7 @@ class MessageService extends AngRe {
 	send(payload) {
 		console.log(`[Atom Service] enable template builder: ${payload}`);
 		this._sendMessage('EnableTemplateBuilderAction', 'AtomAction', payload, true);
+		return payload;
 	}
 }
 

@@ -1,6 +1,8 @@
 import { h, Component } from 'preact';
 import MessageService from "../lib/message-service";
 
+import Canvas from '../components/canvas';
+
 class Home extends Component {
 
 	constructor() {
@@ -23,11 +25,7 @@ class Home extends Component {
 
 	render() {
 		return(
-			<div>
-				<pre>Welcome to the &lt;Insert New Project Name Here&gt; app.</pre>
-				<pre>{JSON.stringify(this.state, null, 2)}</pre>
-				<div style="left: 50%; top: 25%"><button onClick={this.clicked} style="width: 100px; left:-50px;">{this.state.templateBuilder ? 'Disable' : 'Enable'}</button></div>
-			</div>
+			<Canvas/>
 		);
 	}
 }

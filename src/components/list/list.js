@@ -11,7 +11,6 @@ class List extends Component {
 	}
 
 	componentWillReceiveProps(nextProps) {
-		console.log(JSON.stringify(this.state, null, 2));
 		this.setState({articles: nextProps.articles});
 	}
 

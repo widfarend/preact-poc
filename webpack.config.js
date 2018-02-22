@@ -2,7 +2,7 @@ const path = require('path');
 
 module.exports = {
     // input
-    entry: './src/index.js',
+    entry: ['babel-polyfill', './src/index.js'],
 
     // output
     output: {
@@ -13,6 +13,13 @@ module.exports = {
     // transformations
     module: {
         rules: [
+			{
+				test: /\.css$/,
+				use: [
+					{ loader: 'style-loader' },
+					{ loader: 'css-loader', options: { modules: true } }
+				]
+			},
             {
                 test: /\.jsx?/i,
                 loader: 'babel-loader',

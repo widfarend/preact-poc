@@ -19,14 +19,23 @@ class AngRe {
 	}
 
 	_sendMessage(eventName, action, payload, postMessage = false) {
-		if(this.target && postMessage)
-		this.target.postMessage({
-				fromBatwing: true,
-				serviceName: this.constructor.name,
-				action: action,
-				eventName: eventName,
-				payload: payload
-			}, '*');
+		try {
+			if(this.target && postMessage) {
+				this.target.postMessage({
+					fromBatwing: true,
+					serviceName: this.constructor.name,
+					action: action,
+					eventName: eventName,
+					payload: payload
+				}, '*');
+			}
+
+			return true;
+		} catch(e) {
+			console.log(`Error posting message to ${this.target}`, JSON.stringify(e, null, 2));
+			return false;
+		}
+
 	}
 }
 

@@ -1,11 +1,11 @@
-import { ADD_ARTICLE, BUILDER_MODE } from "../types";
+import * as Types from "../types";
 
 export const addArticle = article => ({
-	type: ADD_ARTICLE,
+	type: Types.ADD_ARTICLE,
 	payload: article
 });
 
 export const builderMode = mode => ({
-	type: BUILDER_MODE,
+	type: Types.BUILDER_MODE_REQUESTED,
 	payload: mode
 });
