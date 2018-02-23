@@ -11,6 +11,7 @@ const rootReducer = (state = initialState, action) => {
 		case Types.ADD_ARTICLE:
 			return { ...state, articles: [...state.articles, action.payload] };
 		case Types.BUILDER_MODE_SUCCESS:
+			console.log('SUCKSESHFUL!');
 			return { ...state, builderMode: action.payload };
 		default:
 			if(action.error) {

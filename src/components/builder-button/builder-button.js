@@ -13,6 +13,7 @@ class BuilderButton extends Component {
 	}
 
 	componentWillReceiveProps(nextProps) {
+		console.log('RECEIVED PROPS!!');
 		this.setState({builderMode: nextProps.builderMode});
 	}
 

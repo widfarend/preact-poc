@@ -1,8 +1,16 @@
 import AngRe from './angre';
 
+let _instance = null;
+
 class MessageService extends AngRe {
 	constructor(target) {
 		super(target);
+		if(!_instance) {
+			console.log('We have an instance!');
+			_instance = this;
+		}
+
+		return this._instance;
 	}
 
 	send(payload) {
