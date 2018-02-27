@@ -4,10 +4,7 @@ import MessageService from '../../lib/message-service';
 import * as Types from '../types';
 import * as Actions from '../actions';
 
-// const messageService = new MessageService(window.parent);
-
-
-
+const messageService = new MessageService(window.parent);
 
 // worker Saga: will be fired on BUILDER_MODE actions
 function* putBuilderMode(action) {
@@ -23,11 +20,15 @@ function* putBuilderMode(action) {
 
 function getMessages() {
 	return eventChannel(emitter => {
-		window.addEventListener('message', (message) => {
-			emitter(message);
-        });
 
-		return () => window.removeEventListener('message');
+        const _receiveMessage = (message) => {
+            if(message && message.data && message.data.eventName) {
+                emitter(message);
+            }
+        };
+
+		window.addEventListener('message', _receiveMessage);
+		return () => window.removeEventListener('message', _receiveMessage);
 	});
 }
 
@@ -39,9 +40,7 @@ function* mySaga() {
 		while(true) {
             let messages = yield take(chan);
             console.log(messages.data);
-            if(messages && messages.data && messages.data.eventName) {
-                yield put(Actions[messages.data.eventName](messages.data.payload));
-			}
+			yield put(Actions[messages.data.eventName](messages.data.payload));
 		}
 	} finally {
 		console.log('Ended');
