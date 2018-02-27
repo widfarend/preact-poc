@@ -17,10 +17,9 @@ class AngRe {
 	}
 
 	_receiveMessage(messageEvent) {
-		console.log(messageEvent);
+		console.log(`[${messageEvent.data.eventName} : payload: ${messageEvent.data.payload}`);
 		if(messageEvent && messageEvent.data && messageEvent.data.fromBatwing && Actions[messageEvent.data.eventName]) {
-			// store.dispatch(Actions[messageEvent.data.eventName](messageEvent.data.payload));
-			store.dispatch(Actions.builderMode(messageEvent.data.payload));
+			store.dispatch(Actions[messageEvent.data.eventName](messageEvent.data.payload));
 		}
 	}
 
