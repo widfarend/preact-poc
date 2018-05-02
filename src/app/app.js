@@ -1,5 +1,6 @@
 import { h, Component } from 'preact';
 import { Router } from 'preact-router';
+import { connect } from 'preact-redux';
 import AsyncRoute from 'preact-async-route';
 
 // Routes
@@ -18,11 +19,19 @@ class App extends Component {
 						path="/render"
 						component={Home}
 						/>
+					<AsyncRoute
+						path="/load"
+						component={Home}
+					/>
 				</Router>
 			</div>
 		);
 	}
 }
 
-export default App;
+function select({ app }) {
+	return { ...app };
+}
+
+export default connect(select)(App);
 

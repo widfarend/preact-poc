@@ -8,6 +8,7 @@ const messageService = new MessageService(window.parent);
 
 // worker Saga: will be fired on BUILDER_MODE actions
 function* putBuilderMode(action) {
+	console.log('putBuilderMode');
 	try {
 		const payload = yield call((payload) => {
 			return messageService.send(payload);
@@ -22,7 +23,7 @@ function getMessages() {
 	return eventChannel(emitter => {
 
         const _receiveMessage = (message) => {
-            if(message && message.data && message.data.eventName) {
+            if(message && message.data && message.data.eventName && Actions[message.data.eventName]) {
                 emitter(message);
             }
         };
@@ -36,15 +37,15 @@ function* mySaga() {
 	const chan = yield call(getMessages);
     yield takeLatest(Types.BUILDER_MODE_REQUESTED, putBuilderMode);
 
-    try {
-		while(true) {
-            let messages = yield take(chan);
-            console.log(messages.data);
-			yield put(Actions[messages.data.eventName](messages.data.payload));
-		}
-	} finally {
-		console.log('Ended');
-	}
+	// try {
+	// 	while(true) {
+     //        let messages = yield take(chan);
+	// 		console.log(messages.data);
+	// 		yield put(Actions[messages.data.eventName](messages.data.payload));
+	// 	}
+	// } finally {
+	// 	console.log('Ended');
+	// }
 
 
 }

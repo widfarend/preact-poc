@@ -1,5 +1,6 @@
 import {h, Component} from 'preact';
 import {connect} from 'preact-redux';
+import style from './builder-button.css';
 
 import { builderMode } from '../../redux/actions';
 
@@ -18,7 +19,7 @@ class BuilderButton extends Component {
 	}
 
 	render() {
-		return (<div>
+		return (<div className={style.builderButton}>
 			<pre>Mode: {JSON.stringify(this.state, null, 2)}</pre>
 			<button
 				onClick={() => this.props.onBuilderModeClicked(!this.state.builderMode)}

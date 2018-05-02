@@ -19,6 +19,7 @@
     "webpack-dev-server": "^2.11.1"
   },
   "dependencies": {
+    "normalize.css": "^8.0.0",
     "preact": "^8.2.7",
     "preact-redux": "^2.0.3",
     "preact-router": "^2.6.0",
